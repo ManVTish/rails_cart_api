@@ -1,4 +1,4 @@
-class Model < ApplicationRecord
+class User < ApplicationRecord
     before_save self.email = email.downcase
 
     validates :first_name, :last_name, presence: true, length: {maximum: 10}
