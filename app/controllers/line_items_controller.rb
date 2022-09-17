@@ -15,8 +15,8 @@ class LineItemsController < ApplicationController
 
   # POST /line_items
   def create
-    @line_item = LineItem.new(line_item_params)
-
+    product = Product.find(params[:product_id])
+    @line_item = @cart.add_product(product)
     if @line_item.save
       render json: @line_item, status: :created, location: @line_item
     else
@@ -46,6 +46,6 @@ class LineItemsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def line_item_params
-      params.require(:line_item).permit(:product_id, :cart_id)
+      params.require(:line_item).permit(:product_id)
     end
 end
